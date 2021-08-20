@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.swing.text.Element;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author: chenwei
@@ -34,7 +36,10 @@ public class CqGovSpiderTest {
                     String time = elements1.get(k).getElementsByTag("span").get(0).text();
                     String writeData = " url: " + href + " title: " + title + " time: " + time;
                     System.out.println(writeData);
-                    WriteDataToTxt.writeStringDataToTxt(writeData,"src/data/CqGovData.txt");
+                    LocalDateTime now = LocalDateTime.now();
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-HH-dd hh");
+                    String format = now.format(dateTimeFormatter);
+                    WriteDataToTxt.writeStringDataToTxt(writeData,"src/data/CqGovData" + format + ".txt");
                 }
                 System.out.println("***********");
             }
